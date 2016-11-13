@@ -23,7 +23,8 @@ class Cat {
 }
 
 class DogTestDrive {
-  public static void main (String[] args){
+
+    public static void main (String[] args) {
 
     // New dog d
     Dog d = new Dog();
@@ -37,8 +38,8 @@ class DogTestDrive {
 
     //make dog array
     Dog[] myDogs = new Dog[3];
-    int i = 0;
-    for (i = 0; i < 3; i++) {
+    // int i = 0;
+    for (int i = 0; i < 3; i++) {
       //put some dogs in
       myDogs[i] = new Dog();
 
@@ -55,7 +56,7 @@ class DogTestDrive {
     //init index value for which dog is biggest
     int index = 0;
 
-    for (i = 0; i < myDogs.length; i++) {
+    for (int i = 0; i < myDogs.length; i++) {
       //makes each dog bark
       myDogs[i].bark();
 
@@ -73,4 +74,3 @@ class DogTestDrive {
     System.out.println(myDogs[index].size);
     }
   }
-}

@@ -1,15 +1,35 @@
 //def of dog class
 class Dog {
 
-  int size;
+  private int size;
   String breed;
   String name;
+
+  public int getSize() {
+    return size;
+  }
+
+  void setSize(int aSize) {
+    size = aSize;
+  }
 
   void bark() {
     System.out.println("Ruff! Ruff!");
   }
 
+  boolean isBigger(Dog aDog) {
+    int size2 = aDog.getSize();
+
+    if (size > size2) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
 }
+
 //def of cat class
 class Cat {
 
@@ -25,16 +45,6 @@ class Cat {
 class DogTestDrive {
   public static void main (String[] args){
 
-    // New dog d
-    Dog d = new Dog();
-    d.size = 40;
-    d.bark();
-
-    // New cat c
-    Cat c = new Cat();
-    c.breed = "Maine Coon";
-    c.bark();
-
     //make dog array
     Dog[] myDogs = new Dog[3];
     int i = 0;
@@ -43,34 +53,13 @@ class DogTestDrive {
       myDogs[i] = new Dog();
 
     }
-    //define names for dogs
-    myDogs[0].name = "George";
-    myDogs[1].name = "BIll";
-    myDogs[2].name = "Buttercup";
-    //sizes for dogs
-    myDogs[0].size = 3;
-    myDogs[1].size = 42;
-    myDogs[2].size = 97;
 
-    //init index value for which dog is biggest
-    int index = 0;
+    //tests getSize and setSize
+    myDogs[0].setSize(5);
+    System.out.println(myDogs[0].getSize());
 
-    for (i = 0; i < myDogs.length; i++) {
-      //makes each dog bark
-      myDogs[i].bark();
-
-      //finds largest dog
-      float max = 0f;
-      if (myDogs[i].size > max) {
-        max = myDogs[i].size;
-
-        index = i;
-      }
-    }
-    //prints biggest dog and size
-    System.out.println(myDogs[index].name);
-    System.out.println("is the biggest!");
-    System.out.println(myDogs[index].size);
-    }
+    //tests isBigger
+    myDogs[1].setSize(6);
+    System.out.println(myDogs[0].isBigger(myDogs[1]));
   }
 }
