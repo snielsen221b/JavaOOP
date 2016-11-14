@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 //def of dog class
 class Dog {
 
@@ -54,18 +52,18 @@ class Cat {
 
 class DogPack {
 
-  private ArrayList<Dog> dogs;
+  private Dog[] dogs;
 
   void makeArray(int size) {
-    dogs = new ArrayList<>(size);
+    dogs = new Dog[size];
   }
 
-  void addDog(Dog aDog) {
-    dogs.add(aDog);
+  void addDog(int index, Dog aDog) {
+    dogs[index] = aDog;
   }
 
   Dog biggestDog() {
-    Dog biggestSize = dogs.get(0);
+    Dog biggestSize = dogs[0];
     for (Dog dog:dogs) {
       if (dog.isBigger(biggestSize)) {
         biggestSize = dog;
@@ -96,9 +94,9 @@ class DogPack {
     // }
     DogPack aDogPack = new DogPack();
     aDogPack.makeArray(3);
-    aDogPack.addDog(new Dog(4, "Beagle", "Fred"));
-    aDogPack.addDog(new Dog(23, "Beagle", "George"));
-    aDogPack.addDog(new Dog(5, "Beagle", "Ron"));
+    aDogPack.addDog(0, new Dog(4, "Beagle", "Fred"));
+    aDogPack.addDog(1, new Dog(23, "Beagle", "George"));
+    aDogPack.addDog(2, new Dog(5, "Beagle", "Ron"));
     aDogPack.showDogs();
 
     System.out.println(aDogPack.biggestDog().name);
