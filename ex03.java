@@ -1,9 +1,38 @@
-//def of dog class
-class Dog {
+import java.util.ArrayList;
 
-  private int size;
-  String breed;
-  String name;
+//def of Animal class
+class Animal {
+
+  public int size;
+  public String name;
+
+   void makeNoise() {
+    System.out.println("Moooooooooo");
+  }
+
+  public int getSize() {
+        return size;
+    }
+
+  boolean isBigger(Animal anAnimal) {
+        int size2 = anAnimal.getSize();
+
+        return (size > size2);
+    }
+
+}
+//def of dog class
+class Dog extends Animal {
+    public Dog() {}
+
+    public Dog(int theSize, String theName) {
+        size = theSize;
+        name = theName;
+    }
+
+    public void makeNoise() {
+        System.out.println("Ruff! Ruff!");
+  }
 
   public int getSize() {
     return size;
@@ -13,53 +42,81 @@ class Dog {
     size = aSize;
   }
 
-  void bark() {
-    System.out.println("Ruff! Ruff!");
-  }
-
-  boolean isBigger(Dog aDog) {
-    int size2 = aDog.getSize();
-
-    if (size > size2) {
-      return true;
-    }
-    else {
-      return false;
-    }
-  }
-
 }
 
 //def of cat class
-class Cat {
+class Cat extends Animal {
+    public Cat() {}
 
-  int size;
-  String breed;
-  String name;
-
-  void bark() {
-    System.out.println("I'm a cat");
-  }
-}
-
-class DogTestDrive {
-  public static void main (String[] args){
-
-    //make dog array
-    Dog[] myDogs = new Dog[3];
-    int i = 0;
-    for (i = 0; i < 3; i++) {
-      //put some dogs in
-      myDogs[i] = new Dog();
-
+    public Cat(int theSize, String theName) {
+        size = theSize;
+        name = theName;
     }
 
-    //tests getSize and setSize
-    myDogs[0].setSize(5);
-    System.out.println(myDogs[0].getSize());
-
-    //tests isBigger
-    myDogs[1].setSize(6);
-    System.out.println(myDogs[0].isBigger(myDogs[1]));
+    public void makeNoise() {
+        System.out.println("Mew");
   }
 }
+
+class AnimalPack {
+
+    public ArrayList<Animal> animals;
+
+    public AnimalPack() {
+        animals = new ArrayList<>();
+    }
+
+    public void addAnmial(int index, Animal anAnimal) {
+        animals.add(index, anAnimal);
+    }
+
+    public void makeNoise() {
+        for (Animal animal : animals) {
+            animal.makeNoise();
+        }
+    }
+
+    public Animal biggestAnimal() {
+        Animal biggest = animals.get(0);
+        for (int i = 1; i > animals.size(); i++) {
+            biggest = (animals.get(i).getSize() > biggest.getSize()) ? (animals.get(i)) : (biggest);
+        }
+        return biggest;
+    }
+
+}
+
+class AnimalTest {
+    public static void main (String[] args){
+        //tests make noise
+        Dog d = new Dog(4, "Billy");
+        Cat c = new Cat(5, "Susan");
+
+        d.makeNoise();
+        c.makeNoise();
+
+        //tests isBigger
+        String bigger = (d.isBigger(c)) ? "the dog is bigger" : "the cat is bigger";
+        System.out.println(bigger);
+    }
+
+
+  }
+
+  class AnimalPackTest {
+      public static void main (String[] ars) {
+          //makes animal pack
+          AnimalPack anAnimalPack = new AnimalPack();
+
+          //randomly populates
+          for (int i = 0; i < 4; i++) {
+              Animal anAnimal = (Math.random() > .5) ? (new Dog(3, "dog")) : (new Cat(2, "cat"));
+              anAnimalPack.addAnmial(i,anAnimal);
+          }
+
+          anAnimalPack.makeNoise();
+          System.out.println(anAnimalPack.biggestAnimal().getSize());
+      }
+  }
+
+
