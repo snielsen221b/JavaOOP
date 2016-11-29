@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 //def of Animal class
-class Animal {
+abstract class Animal {
 
   public int size;
   public String name;
