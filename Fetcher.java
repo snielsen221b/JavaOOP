@@ -6,9 +6,7 @@ abstract class Animal {
   public int size;
   public String name;
 
-   void makeNoise() {
-    System.out.println("Moooooooooo");
-  }
+  public abstract void makeNoise();
 
   public int getSize() {
         return size;
@@ -21,8 +19,14 @@ abstract class Animal {
     }
 
 }
+
+//def of fetcher interface
+public interface Fetcher {
+    public abstract  String fetch(String string);
+}
+
 //def of dog class
-class Dog extends Animal {
+class Dog extends Animal implements Fetcher{
     public Dog() {}
 
     public Dog(int theSize, String theName) {
@@ -34,13 +38,19 @@ class Dog extends Animal {
         System.out.println("Ruff! Ruff!");
   }
 
-  public int getSize() {
+    public int getSize() {
     return size;
   }
 
-  void setSize(int aSize) {
+    void setSize(int aSize) {
     size = aSize;
   }
+
+    public String fetch(String string) {
+        String fetched = "Damp ";
+        fetched = fetched + string;
+        return fetched;
+    }
 
 }
 
@@ -88,16 +98,15 @@ class AnimalPack {
 
 class AnimalTest {
     public static void main (String[] args){
-        //tests make noise
-        Dog d = new Dog(4, "Billy");
-        Cat c = new Cat(5, "Susan");
+        //tests Fetcher interface
+        Fetcher f = new Dog();
+        String fetched = f.fetch("tennis ball");
+		System.out.println(fetched);
 
-        d.makeNoise();
-        c.makeNoise();
-
-        //tests isBigger
-        String bigger = (d.isBigger(c)) ? "the dog is bigger" : "the cat is bigger";
-        System.out.println(bigger);
+		// Can a cat fetch? We go to Tom with the story, Tom?
+		Cat c = new Cat();
+		c.fetch("tennis ball");
+		//it can't
     }
 
 
@@ -105,6 +114,9 @@ class AnimalTest {
 
   class AnimalPackTest {
       public static void main (String[] ars) {
+          //checks that animal class is abstract, should return error
+          //Animal a = new Animal();
+
           //makes animal pack
           AnimalPack anAnimalPack = new AnimalPack();
 
