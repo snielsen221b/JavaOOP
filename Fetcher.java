@@ -3,16 +3,23 @@ import java.util.ArrayList;
 //def of Animal class
 abstract class Animal {
 
-  public int size;
-  public String name;
+  	public int size;
+  	public String name;
 
-  public abstract void makeNoise();
+	public Animal() {};
 
-  public int getSize() {
+	public Animal(int size, String theName) {
+		this.size = size;
+		name = theName;
+	}
+
+  	public abstract void makeNoise();
+
+  	public int getSize() {
         return size;
     }
 
-  boolean isBigger(Animal anAnimal) {
+  	boolean isBigger(Animal anAnimal) {
         int size2 = anAnimal.getSize();
 
         return (size > size2);
@@ -27,11 +34,12 @@ public interface Fetcher {
 
 //def of dog class
 class Dog extends Animal implements Fetcher{
-    public Dog() {}
+    public Dog() {
+		System.out.println("Bark");
+	}
 
     public Dog(int theSize, String theName) {
-        size = theSize;
-        name = theName;
+        super();
     }
 
     public void makeNoise() {
@@ -56,12 +64,13 @@ class Dog extends Animal implements Fetcher{
 
 //def of cat class
 class Cat extends Animal {
-    public Cat() {}
+    public Cat() {
+		System.out.println("Meow");
+	}
 
-    public Cat(int theSize, String theName) {
-        size = theSize;
-        name = theName;
-    }
+	public Cat(int size, String theName) {
+		super();
+	}
 
     public void makeNoise() {
         System.out.println("Mew");
@@ -104,8 +113,8 @@ class AnimalTest {
 		System.out.println(fetched);
 
 		// Can a cat fetch? We go to Tom with the story, Tom?
-		Cat c = new Cat();
-		c.fetch("tennis ball");
+		Cat c = new Cat(4, "Lennie");
+		//c.fetch("tennis ball");
 		//it can't
     }
 
