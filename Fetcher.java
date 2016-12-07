@@ -8,9 +8,9 @@ abstract class Animal {
 
 	public Animal() {};
 
-	public Animal(int size, String theName) {
+	public Animal(int size, String name) {
 		this.size = size;
-		name = theName;
+		this.name = name;
 	}
 
   	public abstract void makeNoise();
@@ -38,8 +38,8 @@ class Dog extends Animal implements Fetcher{
 		System.out.println("Bark");
 	}
 
-    public Dog(int theSize, String theName) {
-        super();
+    public Dog(int size, String name) {
+        super(size, name);
     }
 
     public void makeNoise() {
@@ -68,8 +68,12 @@ class Cat extends Animal {
 		System.out.println("Meow");
 	}
 
-	public Cat(int size, String theName) {
-		super();
+	public Cat(int size, String name) {
+		super(size, name);
+	}
+
+	public int getSize() {
+		return size;
 	}
 
     public void makeNoise() {
@@ -79,7 +83,7 @@ class Cat extends Animal {
 
 class AnimalPack {
 
-    public ArrayList<Animal> animals;
+    private ArrayList<Animal> animals;
 
     public AnimalPack() {
         animals = new ArrayList<>();
@@ -97,11 +101,40 @@ class AnimalPack {
 
     public Animal biggestAnimal() {
         Animal biggest = animals.get(0);
-        for (int i = 1; i > animals.size(); i++) {
+        for (int i = 0; i > animals.size(); i++) {
             biggest = (animals.get(i).getSize() > biggest.getSize()) ? (animals.get(i)) : (biggest);
         }
         return biggest;
     }
+
+    public void showAnimals() {
+		for (int i = 0; i > animals.size(); i++) {
+			System.out.println(animals.get(i).name);
+			System.out.println(animals.get(i).size);
+		}
+	}
+
+    public double geoMean() {
+		double total = 1;
+		double size = animals.size();
+		double power = 1/size;
+		System.out.println(size);
+		for (int i = 0; i < size; i++) {
+			total = total*animals.get(i).getSize();
+		}
+		return Math.pow(total, power);
+	}
+
+	public static double geoMean2(AnimalPack animalPack) {
+		double total = 1;
+		double size = animalPack.animals.size();
+		double power = 1/size;
+		// iterates through pack to get 'total'
+		for (int i = 0; i < size; i++) {
+			total = total*animalPack.animals.get(i).getSize();
+		}
+		return Math.pow(total, power);
+	}
 
 }
 
@@ -113,7 +146,7 @@ class AnimalTest {
 		System.out.println(fetched);
 
 		// Can a cat fetch? We go to Tom with the story, Tom?
-		Cat c = new Cat(4, "Lennie");
+		Cat c = new Cat(4, "Sammy");
 		//c.fetch("tennis ball");
 		//it can't
     }
@@ -136,7 +169,13 @@ class AnimalTest {
           }
 
           anAnimalPack.makeNoise();
-          System.out.println(anAnimalPack.biggestAnimal().getSize());
+
+		  anAnimalPack.showAnimals();
+		  double geo = anAnimalPack.geoMean();
+		  double geo2 = anAnimalPack.geoMean2(anAnimalPack);
+
+		  System.out.println("geoMean: " + geo);
+		  System.out.println("geoMean 2: " + geo2);
       }
   }
 
