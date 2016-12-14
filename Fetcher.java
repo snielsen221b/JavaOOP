@@ -145,7 +145,7 @@ class AnimalPack {
 		return Math.pow(total, power);
 	}
 
-	
+
 }
 
 class AnimalTest {
