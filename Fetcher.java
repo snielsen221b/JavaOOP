@@ -1,7 +1,8 @@
-import java.util.ArrayList;
+import java.util.*;
+import java.io.*;
 
 //def of Animal class
-abstract class Animal {
+abstract class Animal implements Comparable<Animal>{
 
   	public int size;
   	public String name;
@@ -19,11 +20,19 @@ abstract class Animal {
         return size;
     }
 
+    class sizeCompare implements Comparator<Animal> {
+		public int compare(Animal one, Animal two) {
+			return one.getSize().compareTo(two.getSize());
+		}
+	}
+
+
   	boolean isBigger(Animal anAnimal) {
         int size2 = anAnimal.getSize();
 
         return (size > size2);
     }
+
 
 }
 
@@ -136,6 +145,7 @@ class AnimalPack {
 		return Math.pow(total, power);
 	}
 
+	
 }
 
 class AnimalTest {
