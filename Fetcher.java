@@ -20,11 +20,18 @@ abstract class Animal implements Comparable<Animal>{
         return size;
     }
 
-    class sizeCompare implements Comparator<Animal> {
-		public int compare(Animal one, Animal two) {
-			return one.getSize().compareTo(two.getSize());
+
+	public int compareTo(Animal that) {
+		if (this.getSize() > that.getSize()) {
+			return 1;
 		}
-	}
+		else if (this.getSize() == that.getSize()) {
+			return 0;
+		}
+		else {
+			return -1;
+		}
+		}
 
 
   	boolean isBigger(Animal anAnimal) {
@@ -134,7 +141,7 @@ class AnimalPack {
 		return Math.pow(total, power);
 	}
 
-	public static double geoMean2(AnimalPack animalPack) {
+	public static double geoMean(AnimalPack animalPack) {
 		double total = 1;
 		double size = animalPack.animals.size();
 		double power = 1/size;
@@ -143,6 +150,12 @@ class AnimalPack {
 			total = total*animalPack.animals.get(i).getSize();
 		}
 		return Math.pow(total, power);
+	}
+
+	public void sortBySize() {
+		Collections.sort(animals);
+		Collections.reverse(animals);
+		System.out.println(animals);
 	}
 
 	
@@ -169,23 +182,33 @@ class AnimalTest {
           //checks that animal class is abstract, should return error
           //Animal a = new Animal();
 
-          //makes animal pack
-          AnimalPack anAnimalPack = new AnimalPack();
+//          //makes animal pack
+//          AnimalPack anAnimalPack = new AnimalPack();
+//
+//          //randomly populates
+//          for (int i = 0; i < 4; i++) {
+//              Animal anAnimal = (Math.random() > .5) ? (new Dog(3, "dog")) : (new Cat(2, "cat"));
+//              anAnimalPack.addAnmial(i,anAnimal);
+//          }
+//
+//          anAnimalPack.makeNoise();
+//
+//		  anAnimalPack.showAnimals();
+//		  double geo = anAnimalPack.geoMean();
+//		  double geo2 = anAnimalPack.geoMean(anAnimalPack);
+//
+//		  System.out.println("geoMean: " + geo);
+//		  System.out.println("geoMean 2: " + geo2);
 
-          //randomly populates
-          for (int i = 0; i < 4; i++) {
-              Animal anAnimal = (Math.random() > .5) ? (new Dog(3, "dog")) : (new Cat(2, "cat"));
-              anAnimalPack.addAnmial(i,anAnimal);
-          }
+		  AnimalPack animalPack = new AnimalPack();
+		  Dog d = new Dog(1, "Fred");
+		  Cat c = new Cat(3, "George");
+		  Dog d1 = new Dog(2, "Tom");
+		  animalPack.addAnmial(0, d);
+		  animalPack.addAnmial(1, c);
+		  animalPack.addAnmial(2, d1);
 
-          anAnimalPack.makeNoise();
-
-		  anAnimalPack.showAnimals();
-		  double geo = anAnimalPack.geoMean();
-		  double geo2 = anAnimalPack.geoMean2(anAnimalPack);
-
-		  System.out.println("geoMean: " + geo);
-		  System.out.println("geoMean 2: " + geo2);
+		  animalPack.sortBySize();
       }
   }
 
